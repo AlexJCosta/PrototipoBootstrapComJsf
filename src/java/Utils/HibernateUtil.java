@@ -5,7 +5,6 @@
 package Utils;
 
 
-import Model.Livro;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -29,7 +28,7 @@ public class HibernateUtil {
                 // Create the SessionFactory from standard (hibernate.cfg.xml)
                 // config file.
                 AnnotationConfiguration ac = new AnnotationConfiguration();
-                ac.addAnnotatedClass(Livro.class);
+               // ac.addAnnotatedClass(Livro.class);
                 sessionFactory = ac.configure().buildSessionFactory();
                 //SchemaExport se = new SchemaExport(ac);
                 //se.create(true, true);
