@@ -12,6 +12,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
+import javax.faces.model.DataModelListener;
 import javax.faces.model.ListDataModel;
 
 /**
@@ -24,13 +25,14 @@ public class LivroController {
 
     private Livro livro;
     private DataModel listaLivros;
-
+    List<Livro> listaDe; 
     public DataModel getListarLivros() {
-        List<Livro> lista = new LivroDaoImp().list();
-        listaLivros = new ListDataModel(lista);
+//        List<Livro> lista = new LivroDaoImp().list();
+        listaLivros = new ListDataModel(listaDe);
         return listaLivros;
     }
-
+    
+ 
     public Livro getLivro() {
         return livro;
     }
@@ -38,6 +40,13 @@ public class LivroController {
     public void setLivro(Livro livro) {
         this.livro = livro;
     }
+
+    public LivroController() {
+//        Livro livro = new Livro(2, "", "", 0, "", "", 0);
+//        LivroDaoImp dao = new LivroDaoImp();
+//        dao.save(livro);
+    }
+    
 
     public String prepararAdicionarLivro(){
         livro = new Livro();
@@ -64,6 +73,15 @@ public class LivroController {
         dao.save(livro);
         return "index";
         
+    }
+    public List<Livro> ListaDeLivro(){
+        
+        return listaDe;
+    }
+    public Livro pegarLivro(){
+        LivroDaoImp dao = new LivroDaoImp();
+        listaDe.add(livro);
+        return dao.getLivro(livro.getId());
     }
 
     public String alterarLivro(){

@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.persistence.Persistence;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 /**
  *
  * @author Invasor
@@ -25,6 +27,7 @@ public class EmpresaDaoImpl implements EmpresaDao {
        em = emf.createEntityManager();
     }
     
+     
     public void save(Empresa empresa) {
         em.getTransaction().begin();
         em.persist(empresa);
@@ -32,8 +35,15 @@ public class EmpresaDaoImpl implements EmpresaDao {
     }
 
     public List<Empresa> list() {
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Transaction t = session.beginTransaction();
+//        List lista = session.createQuery("from empresa").list();
+//        t.commit();
+//        return lista;
+        
         em.getTransaction().begin();
-        Query qe = em.createQuery("select empresa from Empresa empresa");
+        Query qe = em.createQuery("from empresa ");
+       
         List<Empresa> empresas = qe.getResultList();
         em.getTransaction().commit();
         return empresas;
